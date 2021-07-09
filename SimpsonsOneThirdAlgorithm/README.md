@@ -1,4 +1,4 @@
-In this project, the following tasks were execused: 
+In this project, the following tasks were executed: 
 Check for valid input sizes,
 Check for uniform x spacing,
 Correct trapezoid rule given 2 data points,
