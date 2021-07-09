@@ -1,0 +1,30 @@
+function [L,U,P]=luFactor(A)
+length_A=length(A);
+[n q]=size(A);
+if n ~= q
+    error('matrix is not square')
+end
+L=eye(length_A);
+P=L;
+U=A;
+for m=1:length_A
+[QP val_x]=max(abs(U(m:length_A,m)));
+val_x=val_x+m-1;
+if val_x~=m
+t_old=U(m,:);
+U(m,:)=U(val_x,:);
+U(val_x,:)=t_old;
+t_old=P(m,:);
+P(m,:)=P(val_x,:);
+P(val_x,:)=t_old;
+if m >= 2
+t_old=L(m,1:m-1);
+L(m,1:m-1)=L(val_x,1:m-1);
+L(val_x,1:m-1)=t_old;
+end
+end
+for j=m+1:length_A
+L(j,m)=U(j,m)/U(m,m);
+U(j,:)=U(j,:)-L(j,m)*U(m,:);
+end
+end
